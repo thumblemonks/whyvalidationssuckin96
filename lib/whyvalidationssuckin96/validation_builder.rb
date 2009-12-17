@@ -6,19 +6,18 @@ module WhyValidationsSuckIn96
     def initialize(klass_or_mod, definition_block)
       @klass_or_mod = klass_or_mod
       @definition_block = definition_block
-      @defined_validations = []
+      @defined_validations = {}
     end
     
     def create_validations!
       instance_eval(&@definition_block)
-      @klass_or_mod.validation_collection.concat(@defined_validations)
+      @klass_or_mod.validation_collection.merge!(@defined_validations)
     end
   
   private
   
     def validate(validation_name, options = {}, &def_block)
-#      check_name(validation_name)
-      @defined_validations << new_validation(validation_name, options, def_block)
+      @defined_validations[validation_name.to_sym] = new_validation(validation_name, options, def_block)
     end
     
     

@@ -27,7 +27,7 @@ module WhyValidationsSuckIn96
       end
       
       def all_validations
-        @all_validations ||= self.class.validation_collection.collect do |vc|
+        @all_validations ||= self.class.validation_collection.values.collect do |vc|
           vc.new(self)
         end
       end
@@ -39,7 +39,7 @@ module WhyValidationsSuckIn96
       def validation_collection
         @validation_collection ||= begin
           ancestor_with_validations = ancestors[1..-1].detect{|anc| anc.respond_to?(:validation_collection) }
-          ancestor_with_validations ? ancestor_with_validations.validation_collection.dup : []
+          ancestor_with_validations ? ancestor_with_validations.validation_collection.dup : {}
         end
       end
       
