@@ -17,23 +17,24 @@ module WhyValidationsSuckIn96
       end
     end
     
+    def passed?
+      @passed == true
+    end
+    
     def failed?
       @passed == false
     end
     
-    def passes?
+    def validates?
       reset
       @passed = catch :validation_done do
         validate(@validatable)
         pass unless failed?
       end
-    rescue => e
-      fail
-      raise e
     end
     
     def inspect
-      "#<WhyValidationsSuckIn96 subclass for validating '#{self.class.name}'> #{super}"
+      "#<WhyValidationsSuckIn96::Validation subclass for validating '#{self.class.name}'> #{super}"
     end
     
   private

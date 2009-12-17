@@ -18,7 +18,7 @@ module WhyValidationsSuckIn96
       
       def valid?
         all_validations.all? do |validation|
-          validation.passes?
+          validation.validates?
         end
       end
       
@@ -40,17 +40,8 @@ module WhyValidationsSuckIn96
     
     module ClassMethods
       
-      def self.extended(klass_or_mod)
-        klass_or_mod.module_eval do
-          old_inherited = method(:inherited)
-          (class << self; self; end).send(:define_method, :inherited) do |k_or_m|
-            old_inherited(k_or_m)
-            
-          end
-        end
-      end
-      
       def setup_validations(&definition_block)
+        self.validation_collection ||= ancestors.detect{|anc| !anc.validation_collection.nil?}.validation_collection.dup
         builder = ValidationBuilder.new(self, definition_block)
         builder.create_validations!
       end

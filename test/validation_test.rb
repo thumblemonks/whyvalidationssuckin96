@@ -7,6 +7,6 @@ context "validation" do
   
   should "have a readable string returned by inspect" do
     topic.new(Object.new).inspect
-  end.equals(/^#<WhyValidationsSuckIn96 subclass for validating 'validates_rockingness'>/)
+  end.equals(/^#<WhyValidationsSuckIn96::Validation subclass for validating 'validates_rockingness'>/)
   
 end # validation
