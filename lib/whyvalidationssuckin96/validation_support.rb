@@ -5,10 +5,6 @@ module WhyValidationsSuckIn96
     
     def self.included(klass_or_mod)
       klass_or_mod.module_eval do
-        class << self
-          attr_accessor :validation_collection
-        end
-        self.validation_collection = []
         extend WhyValidationsSuckIn96::ValidationSupport::ClassMethods
         include WhyValidationsSuckIn96::ValidationSupport::InstanceMethods
       end
@@ -39,6 +35,13 @@ module WhyValidationsSuckIn96
     end # InstanceMethods
     
     module ClassMethods
+      
+      def validation_collection
+        @validation_collection ||= begin
+          ancestor_with_validations = ancestors[1..-1].detect{|anc| anc.respond_to?(:validation_collection) }
+          ancestor_with_validations ? ancestor_with_validations.validation_collection.dup : []
+        end
+      end
       
       def setup_validations(&definition_block)
         self.validation_collection ||= ancestors.detect{|anc| !anc.validation_collection.nil?}.validation_collection.dup

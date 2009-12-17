@@ -92,7 +92,7 @@ context "validation_support" do
     end # given an instance of the class
   end   # when mixed into a class and used to add a simple validation
   
-  context "when extending a class with existing validations" do
+  context "when extending a class with existing validations and adding new validations" do
     parent_class = child_class = nil
     
     setup do
@@ -139,4 +139,28 @@ context "validation_support" do
     end.includes(:title_is_present)
     
   end   # when extending a class with existing validations
-end     # validation_support
+  
+  context "when extending a class with existing validations and not adding new validations" do
+    parent_class = child_class = nil
+    
+    setup do
+      parent_class = Class.new do
+        attr_accessor :artist
+        include WhyValidationsSuckIn96::ValidationSupport
+        setup_validations do
+          validate :artist_is_present, :example => "dj shadow", :message => "artist must be present" do |inst|
+            pass if inst.artist && !inst.artist.empty?
+            fail
+          end
+        end # setup_validations
+      end   # parent_class
+      
+      child_class = Class.new(parent_class)
+    end     # setup
+    
+    should "have the parent class' validations by default" do
+      child_class.validation_collection.size
+    end.equals(1)
+  
+  end # when extending a class with existing validations and not adding new validations
+end   # validation_support
