@@ -29,6 +29,14 @@ context "validation_support" do
     should "add a 'all_validations' instance method" do
       topic.new
     end.respond_to(:all_validations)
+    
+    should "have an empty validation collection" do
+      topic.validation_collection.size
+    end.equals(0)
+    
+    should "be valid when no validations have been defined" do
+      topic.new.valid?
+    end
   end # mixed into a class
   
   context "when mixed into a class and used to add a simple validation" do
@@ -163,4 +171,31 @@ context "validation_support" do
     end.equals(1)
   
   end # when extending a class with existing validations and not adding new validations
+  
+  context "when calling setup_validations twice in a class" do
+    setup do
+      Class.new do
+        include WhyValidationsSuckIn96::ValidationSupport
+        setup_validations do
+          validate(:first_validation) {}
+        end
+        setup_validations do
+          validate(:second_validation) {}
+        end
+      end   # Class.new
+    end     # setup
+    
+    should "add two validations to the class" do
+      topic.validation_collection.size
+    end.equals(2)
+    
+    should "have the first validation" do
+      topic.validation_collection.collect {|v| v.name}
+    end.includes(:first_validation)
+    
+    should "have the second validation" do
+      topic.validation_collection.collect {|v| v.name}
+    end.includes(:second_validation)
+    
+  end # when calling setup_validations twice in a class
 end   # validation_support
