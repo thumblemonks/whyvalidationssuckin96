@@ -29,7 +29,7 @@ module WhyValidationsSuckIn96
       reset
       @passed = catch :validation_done do
         validate(@validatable)
-        pass unless failed?
+        pass
       end
     end
     
