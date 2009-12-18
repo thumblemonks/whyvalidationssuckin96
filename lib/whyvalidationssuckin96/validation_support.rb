@@ -11,6 +11,10 @@ module WhyValidationsSuckIn96
     end
     
     module InstanceMethods
+
+      def invalid?
+        !valid?
+      end
       
       def valid?
         all_validations.all? do |validation|

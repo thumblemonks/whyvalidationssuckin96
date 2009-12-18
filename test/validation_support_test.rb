@@ -18,6 +18,10 @@ context "validation_support" do
       topic.new
     end.respond_to(:valid?)
     
+    should "add a 'invalid?' instance method" do
+      topic.new
+    end.respond_to(:invalid?)
+    
     should "add a 'failed_validations' instance method" do
       topic.new
     end.respond_to(:failed_validations)
@@ -36,6 +40,10 @@ context "validation_support" do
     
     should "be valid when no validations have been defined" do
       topic.new.valid?
+    end
+    
+    should "not be invalid when no validations have been defined" do
+      !topic.new.invalid?
     end
   end # mixed into a class
   

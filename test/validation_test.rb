@@ -5,7 +5,7 @@ context "validation" do
     setup do
       WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, {:example => "stuff"}, lambda {})
     end
-  
+    
     should "have a readable string returned by inspect" do
       topic.new(Object.new).inspect
     end.equals(/^#<WhyValidationsSuckIn96::Validation subclass for validating 'validates_rockingness'>/)
@@ -27,6 +27,10 @@ context "validation" do
     setup do
       WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, {:example => "stuff"}, lambda {})
     end
+    
+    should "allow accessing the options via an instance method" do
+      topic.new(Object.new).options
+    end.equals(:example => "stuff")
     
     should "return a true by default when pass/fail aren't called in the validation definition" do
       topic.new(Object.new).validates?

@@ -37,6 +37,10 @@ module WhyValidationsSuckIn96
       "#<WhyValidationsSuckIn96::Validation subclass for validating '#{self.class.name}'> #{super}"
     end
     
+    def options
+      @options ||= self.class.options.dup
+    end
+    
   private
     
     def reset

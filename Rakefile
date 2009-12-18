@@ -9,10 +9,10 @@ begin
     gem.description = %Q{A library for setting up model validations, such as in ActiveRecord.}
     gem.email = "gabriel.gironda@gmail.com"
     gem.homepage = "http://github.com/thumblemonks/whyvalidationssuckin96"
-    gem.authors = ["gabrielg"]
+    gem.authors = ["gabrielg", "douglasmeyer"]
     gem.add_development_dependency "riot", ">= 0"
     gem.add_development_dependency "yard", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_development_dependency "activerecord", ">= 2.3.0"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
