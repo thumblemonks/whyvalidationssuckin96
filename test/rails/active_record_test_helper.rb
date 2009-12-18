@@ -5,6 +5,10 @@ ActiveRecord::Schema.define(:version => 1) do
   create_table :musical_works do |t|
     t.string :name
   end
+  
+  create_table :visual_works do |t|
+    t.string :name
+  end
 end 
 
 class MusicalWork < ActiveRecord::Base
@@ -16,20 +20,20 @@ class MusicalWork < ActiveRecord::Base
   end
   
   setup_validations do
-    validate :something_that_passes do |record|
-      pass if record.state == :pass
+    validate :something_that_passes do
+      pass if validatable.state == :pass
     end
     
-    validate :something_that_fails do |record|
-      fail if record.state == :fail
+    validate :something_that_fails do
+      fail if validatable.state == :fail
     end
     
-    validate :validation_that_runs_on_update, :on => :update do |record|
-      record.validations_run << :validation_that_runs_on_update
+    validate :validation_that_runs_on_update, :on => :update do
+      validatable.validations_run << :validation_that_runs_on_update
     end
     
-    validate :validation_that_runs_on_create, :on => :create do |record|
-      record.validations_run << :validation_that_runs_on_create
+    validate :validation_that_runs_on_create, :on => :create do
+      validatable.validations_run << :validation_that_runs_on_create
     end
   end
   

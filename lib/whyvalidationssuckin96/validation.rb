@@ -1,19 +1,28 @@
 module WhyValidationsSuckIn96
   class Validation
+    DefaultOptions = {}
+    
+    attr_accessor :options
+    attr_reader :validatable
+    
     class << self
-      attr_accessor :name, :options
+      attr_accessor :name
     end
     
-    def initialize(validatable)
+    def initialize(validatable, options = {})
       @validatable = validatable
+      @options = self.class::DefaultOptions.merge(options)
     end
     
-    def self.new_subclass(name, options, def_block)
+    def self.new_subclass(name, def_block)
       Class.new(self) do
         self.name = name.to_sym
-        self.options = options
         define_method(:validate, &def_block)
         private :validate
+    
+        def inspect
+          "#<WhyValidationsSuckIn96::Validation subclass for validating '#{self.class.name}'> #{super}"
+        end
       end
     end
     
@@ -25,20 +34,20 @@ module WhyValidationsSuckIn96
       @passed == false
     end
     
+    def has_run?
+      @passed != nil
+    end
+    
     def validates?
       reset
       @passed = catch :validation_done do
-        validate(@validatable)
+        validate
         pass
       end
     end
     
-    def inspect
-      "#<WhyValidationsSuckIn96::Validation subclass for validating '#{self.class.name}'> #{super}"
-    end
-    
-    def options
-      @options ||= self.class.options.dup
+    def message
+      @options[:message] || "failed validation"
     end
     
   private

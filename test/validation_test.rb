@@ -3,7 +3,7 @@ require 'teststrap'
 context "validation" do
   context "creating a new subclass" do
     setup do
-      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, {:example => "stuff"}, lambda {})
+      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, lambda {})
     end
     
     should "have a readable string returned by inspect" do
@@ -14,10 +14,6 @@ context "validation" do
       topic.name
     end.equals(:validates_rockingness)
     
-    should "have an accessor for the given options on the new subclass" do
-      topic.options
-    end.equals({:example => 'stuff'})
-    
     should "define validate as private on the new subclass" do
       topic.private_instance_methods
     end.includes("validate")    
@@ -25,11 +21,11 @@ context "validation" do
   
   context "an instance of a subclass" do
     setup do
-      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, {:example => "stuff"}, lambda {})
+      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, lambda {})
     end
     
     should "allow accessing the options via an instance method" do
-      topic.new(Object.new).options
+      topic.new(Object.new, :example => "stuff").options
     end.equals(:example => "stuff")
     
     should "return a true by default when pass/fail aren't called in the validation definition" do
@@ -50,12 +46,16 @@ context "validation" do
       topic.new(Object.new).failed?
     end.equals(false)
     
+    should "not return true for has_run? if the validation hasn't run yet" do
+      topic.new(Object.new).has_run?
+    end.equals(false)
+    
   end # an instance of a subclass
   
   context "an instance of a subclass with an actual validation definition" do
     setup do
-      validation = lambda { |val| val ? pass : fail }
-      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, {}, validation)
+      validation = lambda { validatable ? pass : fail }
+      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, validation)
     end
 
     should "have validates? return true if the validation passes" do
@@ -67,6 +67,12 @@ context "validation" do
       validation = topic.new(true)
       validation.validates?
       validation.passed?
+    end
+    
+    should "have has_run? return true when the validation runs" do
+      validation = topic.new(true)
+      validation.validates?
+      validation.has_run?
     end
     
     should "have validates? return false if the validation fails" do
@@ -83,8 +89,8 @@ context "validation" do
   
   context "an instance of a subclass with a validation definition that raises" do
     setup do
-      validation = lambda { |val| raise "hell" }
-      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, {}, validation)
+      validation = lambda { raise "hell" }
+      WhyValidationsSuckIn96::Validation.new_subclass(:validates_rockingness, validation)
     end
     
     should "raise an exception when validating" do

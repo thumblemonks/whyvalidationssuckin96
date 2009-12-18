@@ -4,7 +4,7 @@ require 'ostruct'
 context "validation builder" do
   context "when defining some standard validations" do
     setup do
-      fake_validation_target = OpenStruct.new(:validation_collection => {})
+      fake_validation_target = OpenStruct.new(:validation_collection => [])
       validation_block = lambda do
         validate(:validates_whatever) {}
         validate(:validates_whenever) {}
@@ -13,22 +13,22 @@ context "validation builder" do
       fake_validation_target
     end
 
-    should "have a validates_whatever key in the collection" do
-      topic.validation_collection.keys
-    end.includes(:validates_whatever)
+    should "have a validates_whatever validation in the collection" do
+      topic.validation_collection.detect { |(validation, opts)| validation.name == :validates_whatever }
+    end
     
-    should "have a validates_whenever key in the collection" do
-      topic.validation_collection.keys
-    end.includes(:validates_whenever)
+    should "have a validates_whenever validation in the collection" do
+      topic.validation_collection.detect { |(validation, opts)| validation.name == :validates_whenever }
+    end
     
     should "have Validation subclasses as the values for the validation_collection" do
-      topic.validation_collection.values.all? {|k| k.ancestors.include?(WhyValidationsSuckIn96::Validation)}
+      topic.validation_collection.all? {|(klass,opts)| klass.ancestors.include?(WhyValidationsSuckIn96::Validation)}
     end
   end # when defining some standard validations
   
   context "when defining multiple validations with the same name in the one validation definition" do
     setup do
-      fake_validation_target = OpenStruct.new(:validation_collection => {})
+      fake_validation_target = OpenStruct.new(:validation_collection => [])
       validation_block = lambda do
         validate(:we_are_clones) {}
         validate(:we_are_clones) {}
@@ -45,7 +45,7 @@ context "validation builder" do
   
   context "when defining multiple validations with the same name in more than one validation definition" do
     setup do
-      fake_validation_target = OpenStruct.new(:validation_collection => {})
+      fake_validation_target = OpenStruct.new(:validation_collection => [])
       validation_block = lambda do
         validate(:we_are_clones) {}
       end # validation_block

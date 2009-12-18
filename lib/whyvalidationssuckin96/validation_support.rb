@@ -17,9 +17,9 @@ module WhyValidationsSuckIn96
       end
       
       def valid?
-        all_validations.all? do |validation|
+        all_validations.collect do |validation|
           validation.validates?
-        end
+        end.all?
       end
       
       def failed_validations
@@ -31,8 +31,8 @@ module WhyValidationsSuckIn96
       end
       
       def all_validations
-        @all_validations ||= self.class.validation_collection.values.collect do |vc|
-          vc.new(self)
+        @all_validations ||= self.class.validation_collection.collect do |(vc,opts)|
+          vc.new(self, opts)
         end
       end
       
@@ -43,7 +43,7 @@ module WhyValidationsSuckIn96
       def validation_collection
         @validation_collection ||= begin
           ancestor_with_validations = ancestors[1..-1].detect{|anc| anc.respond_to?(:validation_collection) }
-          ancestor_with_validations ? ancestor_with_validations.validation_collection.dup : {}
+          ancestor_with_validations ? ancestor_with_validations.validation_collection.dup : []
         end
       end
       
