@@ -15,7 +15,7 @@ module WhyValidationsSuckIn96
     
     def validate
       super
-      if validatable.send(attribute).to_s =~ options[:with]
+      if attribute_value.to_s =~ options[:with]
         pass
       else
         fail

@@ -15,7 +15,7 @@ module WhyValidationsSuckIn96
     
     def validate
       super
-      if options[:in].include?(validatable.send(attribute))
+      if options[:in].include?(attribute_value)
         fail
       else
         pass

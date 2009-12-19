@@ -11,7 +11,7 @@ module WhyValidationsSuckIn96
     def validate
       super
       skip unless confirmation_value = validatable.send(confirmation_field)
-      if validatable.send(attribute) == confirmation_value
+      if confirmation_value == attribute_value
         pass
       else
         fail

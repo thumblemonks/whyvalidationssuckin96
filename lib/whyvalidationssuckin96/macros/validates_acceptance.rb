@@ -10,7 +10,7 @@ module WhyValidationsSuckIn96
     
     def validate
       super
-      if validatable.send(attribute) == options[:accept]
+      if options[:accept] == attribute_value
         pass
       else
         fail

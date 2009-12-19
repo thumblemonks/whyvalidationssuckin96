@@ -7,23 +7,26 @@ module WhyValidationsSuckIn96
     end
     
     def attribute
-      @options[:attribute]
+      options[:attribute]
+    end
+
+    def attribute_value
+      validatable.send(options[:attribute])
     end
     
     def validate
-debugger if $dbg
       skip if skip_on_blank? || skip_on_nil?
       super
     end
     
   private
-  
+
     def skip_on_nil?
-      @options[:allow_nil] && validatable.send(attribute).nil?
+      options[:allow_nil] && attribute_value.nil?
     end
     
     def skip_on_blank?
-      @options[:allow_blank] && validatable.send(attribute).blank?
+      options[:allow_blank] && attribute_value.blank?
     end
   end # AttributeBasedValidation
 end   # WhyValidationsSuckIn96
