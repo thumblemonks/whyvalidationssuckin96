@@ -80,4 +80,14 @@ module WhyValidationsSuckIn96
   end   # ActiveRecord
 end     # WhyValidationsSuckIn96
 
+module ActiveRecord
+  class RecordInvalid < ActiveRecordError
+    attr_reader :record
+    def initialize(record)
+      @record = record
+      super
+    end
+  end # RecordInvalid
+end   # ActiveRecord
+
 ActiveRecord::Base.instance_eval { include WhyValidationsSuckIn96::ActiveRecord }

@@ -62,3 +62,9 @@ class MusicalWork < ActiveRecord::Base
   end
   
 end
+
+class VisualWork < ActiveRecord::Base
+  setup_validations do
+    validates_presence_of :name
+  end
+end

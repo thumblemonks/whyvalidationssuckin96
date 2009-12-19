@@ -7,6 +7,32 @@ context "active record integration" do
     ActiveRecord::Base
   end.respond_to(:validation_collection)
   
+  context "given an example class, 'VisualWork'" do
+    setup { VisualWork } 
+    
+    should "not save when invalid?" do
+      inst = topic.new
+      inst.save
+      inst.new_record?
+    end
+    
+    should "save when valid" do
+      inst = topic.new(:name => "test")
+      inst.save
+      !inst.new_record?
+    end
+    
+    should "raise the expected exception when invalid and using save!" do
+      inst = topic.new
+      inst.save!
+    end.raises(ActiveRecord::RecordInvalid)
+
+    should "raise the expected exception when invalid and using create!" do
+      topic.create!
+    end.raises(ActiveRecord::RecordInvalid)
+    
+  end # given an example class, 'VisualWork'
+  
   context "given an example class, 'MusicalWork'" do
     setup { MusicalWork }
     
