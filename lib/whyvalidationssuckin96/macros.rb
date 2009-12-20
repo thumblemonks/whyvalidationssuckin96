@@ -1,4 +1,5 @@
 require 'whyvalidationssuckin96/macros/validates_acceptance'
+require 'whyvalidationssuckin96/macros/validates_associated'
 require 'whyvalidationssuckin96/macros/validates_confirmation'
 require 'whyvalidationssuckin96/macros/validates_exclusion'
 require 'whyvalidationssuckin96/macros/validates_format'

@@ -1,6 +1,5 @@
 require 'teststrap'
 require 'rails/active_record_test_helper'
-require 'digest/sha1'
 
 context "validates uniqueness" do
   
