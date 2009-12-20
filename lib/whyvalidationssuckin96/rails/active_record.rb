@@ -2,14 +2,15 @@ require 'whyvalidationssuckin96'
 require 'active_record'
 require 'active_record/base'
 require 'active_record/callbacks'
+require 'whyvalidationssuckin96/rails/macros'
 
 module WhyValidationsSuckIn96
   
   module ActiveRecord
     RemovableInstanceMethods = %w[invalid? validate_on_create validate_on_update validate errors]
-    RemovableClassMethods = %w[validate validate_on_create validate_on_update validates_format_of validates_each 
+    RemovableClassMethods = %w[validate validate_on_create validate_on_update validates_format_of validates_each
                                validates_inclusion_of validates_size_of validates_confirmation_of validates_exclusion_of
-                               validates_uniqueness_of validates_associated validates_acceptance_of 
+                               validates_uniqueness_of validates_associated validates_acceptance_of
                                validates_numericality_of validates_presence_of validates_length_of]
     
     def self.included(klass_or_mod)
@@ -53,9 +54,9 @@ module WhyValidationsSuckIn96
       end
       
       def valid_with_lifecycle_checking?
-        validations_for_current_lifecycle.all? do |validation|
+        validations_for_current_lifecycle.collect do |validation|
           validation.validates?
-        end
+        end.all?
       end
       
       def validations_for_update

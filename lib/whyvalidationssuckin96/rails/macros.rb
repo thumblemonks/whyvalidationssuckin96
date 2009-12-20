@@ -1,0 +1,2 @@
+require 'whyvalidationssuckin96/rails/macros/validates_uniqueness'
+require 'whyvalidationssuckin96/rails/macros/validates_associated'

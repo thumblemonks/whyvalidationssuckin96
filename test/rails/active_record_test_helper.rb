@@ -8,6 +8,8 @@ ActiveRecord::Schema.define(:version => 1) do
   
   create_table :visual_works do |t|
     t.string :name
+    t.string :author
+    t.string :type
   end
 end 
 
@@ -66,5 +68,23 @@ end
 class VisualWork < ActiveRecord::Base
   setup_validations do
     validates_presence_of :name
+  end
+end
+
+class Photograph < VisualWork
+  setup_validations do
+    validates_uniqueness_of :author, :base_class_scope => false
+  end
+end
+
+class Painting < VisualWork
+  setup_validations do
+    validates_uniqueness_of :author, :base_class_scope => true
+  end
+end
+
+class Collage < VisualWork
+  setup_validations do
+    validates_uniqueness_of :name, :scope => :author
   end
 end

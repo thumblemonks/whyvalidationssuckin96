@@ -20,10 +20,10 @@ module WhyValidationsSuckIn96
     
     def validate
       super
-      all_valid = ValidOptions.all? do |opt_name|
+      all_valid = ValidOptions.collect do |opt_name|
         next(true) if options[opt_name].nil?
         send(:"validate_#{opt_name}")
-      end
+      end.all?
       all_valid ? pass : fail
     end
 

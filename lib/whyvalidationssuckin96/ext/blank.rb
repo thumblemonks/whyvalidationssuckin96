@@ -1,48 +1,47 @@
 class Object
-  unless instance_methods.grep("blank?")
+  unless instance_methods(false).include?("blank?")
     def blank?
       respond_to?(:empty?) ? empty? : !self
     end
   end
-end 
+end
 
 class String
-  unless instance_methods.grep("blank?")
+  unless instance_methods(false).include?("blank?")
     def blank?
       self !~ /\S/
     end
   end
-end 
+end
 
 class Numeric
-  unless instance_methods.grep("blank?")
+  unless instance_methods(false).include?("blank?")
     def blank?
       false
     end
   end
-end 
-    
+end
+
 class TrueClass
-  unless instance_methods.grep("blank?")
+  unless instance_methods(false).include?("blank?")
     def blank?
       false
     end
   end
-end 
-  
+end
+
 class FalseClass
-  unless instance_methods.grep("blank?")
+  unless instance_methods(false).include?("blank?")
     def blank?
       true
     end
   end
-end 
-    
+end
+
 class NilClass
-  unless instance_methods.grep("blank?")
+  unless instance_methods(false).include?("blank?")
     def blank?
       true
     end
   end
-end 
-      
+end
