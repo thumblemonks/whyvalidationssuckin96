@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whyvalidationssuckin96}
-  s.version = "1.0.0"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["gabrielg", "douglasmeyer"]
-  s.date = %q{2009-12-20}
+  s.date = %q{2009-12-21}
   s.description = %q{A library for setting up model validations, such as in ActiveRecord.}
   s.email = %q{gabriel.gironda@gmail.com}
   s.extra_rdoc_files = [
@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
      "doc/WhyValidationsSuckIn96/ValidatesNumericality.html",
      "doc/WhyValidationsSuckIn96/ValidatesPresence.html",
      "doc/WhyValidationsSuckIn96/ValidatesUniqueness.html",
+     "doc/WhyValidationsSuckIn96/ValidatesUrl.html",
      "doc/WhyValidationsSuckIn96/Validation.html",
      "doc/WhyValidationsSuckIn96/ValidationBuilder.html",
      "doc/WhyValidationsSuckIn96/ValidationSupport.html",
@@ -78,6 +79,7 @@ Gem::Specification.new do |s|
      "lib/whyvalidationssuckin96/macros/validates_length.rb",
      "lib/whyvalidationssuckin96/macros/validates_numericality.rb",
      "lib/whyvalidationssuckin96/macros/validates_presence.rb",
+     "lib/whyvalidationssuckin96/macros/validates_url.rb",
      "lib/whyvalidationssuckin96/rails/active_record.rb",
      "lib/whyvalidationssuckin96/rails/macros.rb",
      "lib/whyvalidationssuckin96/rails/macros/validates_uniqueness.rb",
@@ -95,6 +97,7 @@ Gem::Specification.new do |s|
      "test/macros/validates_length_test.rb",
      "test/macros/validates_numericality_test.rb",
      "test/macros/validates_presence_test.rb",
+     "test/macros/validates_url_test.rb",
      "test/rails/active_record_test.rb",
      "test/rails/active_record_test_helper.rb",
      "test/rails/macros/validates_uniqueness_test.rb",
@@ -121,6 +124,7 @@ Gem::Specification.new do |s|
      "test/macros/validates_length_test.rb",
      "test/macros/validates_numericality_test.rb",
      "test/macros/validates_presence_test.rb",
+     "test/macros/validates_url_test.rb",
      "test/rails/active_record_test.rb",
      "test/rails/active_record_test_helper.rb",
      "test/rails/macros/validates_uniqueness_test.rb",
