@@ -102,7 +102,8 @@ Gem::Specification.new do |s|
      "test/teststrap.rb",
      "test/validation_builder_test.rb",
      "test/validation_support_test.rb",
-     "test/validation_test.rb"
+     "test/validation_test.rb",
+     "whyvalidationssuckin96.gemspec"
   ]
   s.homepage = %q{http://github.com/thumblemonks/whyvalidationssuckin96}
   s.rdoc_options = ["--charset=UTF-8"]
