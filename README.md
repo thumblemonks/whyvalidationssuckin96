@@ -116,6 +116,11 @@ Then you can define validations as expected in your model classes:
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request.
 
+## Todo
+
+* Investigate moving to a model where single instances of validations are created and passed the object to validate,
+  rather than the per-object validation scheme right now which _may_ be a bottleneck.
+  
 ## Copying
 
 Copyright (c) 2009 gabrielg/thumblemonks. See LICENSE for details.
