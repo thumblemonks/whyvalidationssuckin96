@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=UTF-8" />
+<title>Module: WhyValidationsSuckIn96::ValidationSupport::ClassMethods</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo; 
+    <a href="../../WhyValidationsSuckIn96.html" title="WhyValidationsSuckIn96">WhyValidationsSuckIn96</a> &raquo; <a href="../ValidationSupport.html" title="ValidationSupport">ValidationSupport</a>
+     &raquo; 
+    <span class="title">ClassMethods</span>
+  
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Namespace List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: WhyValidationsSuckIn96::ValidationSupport::ClassMethods 
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/whyvalidationssuckin96/validation_support.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+ClassMethods
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+  <h2>Instance Method Summary</h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#setup_validations-instance_method" title="#setup_validations (instance method)">- (Object) <strong>setup_validations</strong>(&amp;definition_block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc">
+Sets up validations for the class or module this module has been mixed
+into.
+
+</span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validation_collection-instance_method" title="#validation_collection (instance method)">- (Array) <strong>validation_collection</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc">
+An array of arrays, the first element of each being the validation subclass
+that will be instantiated when validation is performed, the last element
+being the options the validation will be instantiated with.
+
+</span>
+  
+</li>
+
+    
+  </ul>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="setup_validations-instance_method">
+  
+    - (<tt><a href="../../Object.html" title="Object">Object</a></tt>) <strong>setup_validations</strong>(&amp;definition_block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sets up validations for the class or module this module has been mixed into
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/validation_support.rb', line 66</span>
+
+<span class='def def kw'>def</span> <span class='setup_validations identifier id'>setup_validations</span><span class='lparen token'>(</span><span class='bitand op'>&amp;</span><span class='definition_block identifier id'>definition_block</span><span class='rparen token'>)</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='validation_collection identifier id'>validation_collection</span> <span class='opasgn op'>||=</span> <span class='ancestors identifier id'>ancestors</span><span class='dot token'>.</span><span class='detect identifier id'>detect</span><span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='anc identifier id'>anc</span><span class='bitor op'>|</span> <span class='notop op'>!</span><span class='anc identifier id'>anc</span><span class='dot token'>.</span><span class='validation_collection identifier id'>validation_collection</span><span class='dot token'>.</span><span class='nil? fid id'>nil?</span><span class='rbrace token'>}</span><span class='dot token'>.</span><span class='validation_collection identifier id'>validation_collection</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span>
+  <span class='builder identifier id'>builder</span> <span class='assign token'>=</span> <span class='ValidationBuilder constant id'>ValidationBuilder</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='self self kw'>self</span><span class='comma token'>,</span> <span class='definition_block identifier id'>definition_block</span><span class='rparen token'>)</span>
+  <span class='builder identifier id'>builder</span><span class='dot token'>.</span><span class='create_validations! fid id'>create_validations!</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="validation_collection-instance_method">
+  
+    - (<tt>Array</tt>) <strong>validation_collection</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+An array of arrays, the first element of each being the validation subclass
+that will be instantiated when validation is performed, the last element
+being the options the validation will be instantiated with.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/validation_support.rb', line 58</span>
+
+<span class='def def kw'>def</span> <span class='validation_collection identifier id'>validation_collection</span>
+  <span class='@validation_collection ivar id'>@validation_collection</span> <span class='opasgn op'>||=</span> <span class='begin begin kw'>begin</span>
+    <span class='ancestor_with_validations identifier id'>ancestor_with_validations</span> <span class='assign token'>=</span> <span class='ancestors identifier id'>ancestors</span><span class='lbrack token'>[</span><span class='float val'>1</span><span class='dot2 op'>..</span><span class='integer val'>-1</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='detect identifier id'>detect</span><span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='anc identifier id'>anc</span><span class='bitor op'>|</span> <span class='anc identifier id'>anc</span><span class='dot token'>.</span><span class='respond_to? fid id'>respond_to?</span><span class='lparen token'>(</span><span class='symbol val'>:validation_collection</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+    <span class='ancestor_with_validations identifier id'>ancestor_with_validations</span> <span class='integer val'>? </span><span class='ancestor_with_validations identifier id'>ancestor_with_validations</span><span class='dot token'>.</span><span class='validation_collection identifier id'>validation_collection</span><span class='dot token'>.</span><span class='dup identifier id'>dup</span> <span class='colon op'>:</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Dec 20 19:54:21 2009 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
