@@ -2,6 +2,33 @@ require 'whyvalidationssuckin96/skippable_validation'
 require 'whyvalidationssuckin96/attribute_based_validation'
 
 module WhyValidationsSuckIn96
+  
+  # Checks the validity of an attribute against a given set of sizes.
+  #
+  # @example Checking against an exact value
+  #   setup_validations do
+  #     validates_length_of :choices, :is => 4
+  #   end
+  #
+  # @example Checking against a range
+  #   setup_validations do
+  #     validates_length_of :choices, :in => 1..10
+  #   end
+  #
+  # @example Checking against a minimum value
+  #   setup_validations do
+  #     validates_length_of :choices, :minimum => 1
+  #   end
+  #
+  # @example Checking against a maximum value
+  #   setup_validations do
+  #     validates_length_of :choices, :maximum => 10
+  #   end
+  #
+  # @example Checking against a minimum and maximum value
+  #   setup_validations do
+  #     validates_length_of :choices, :minimum => 1, :maximum => 10
+  #   end
   class ValidatesLength < Validation  
     include WhyValidationsSuckIn96::SkippableValidation
     include WhyValidationsSuckIn96::AttributeBasedValidation
@@ -13,6 +40,12 @@ module WhyValidationsSuckIn96
       :in => [:minimum, :maximum, :is]
     }
 
+    # @param  [Object] validatable          An object to be validated.
+    # @param  [Hash]   options              The options to set up the validation with.
+    # @option options  [#==]       :is      An exact value to check the validatable object's #size against.
+    # @option options  [#include?] :in      A range to check the validatable object's #size against.
+    # @option options  [#<=]       :minimum A minimum value to check the validatable object's size against.
+    # @option options  [#>=]       :maximum A maximum value to check the validatable object's size against.
     def initialize(validatable, options = {})
       super
       check_options(options)

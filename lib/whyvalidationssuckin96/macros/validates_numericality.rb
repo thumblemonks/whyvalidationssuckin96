@@ -2,6 +2,19 @@ require 'whyvalidationssuckin96/skippable_validation'
 require 'whyvalidationssuckin96/attribute_based_validation'
 
 module WhyValidationsSuckIn96
+  
+  # Checks to see if a given attribute is a valid numerical value. Allows a certain degree of latitude in determining
+  # what is a valid numerical value, like allowing commas and spaces in the value for example.
+  #
+  # @example Default usage
+  #   setup_validations do
+  #     validates_numericality_of :cost
+  #   end
+  #
+  # @example Only allow integer values
+  #   setup_validations do
+  #     validates_numericality_of :cost, :only_integer => true
+  #   end
   class ValidatesNumericality < Validation  
     include WhyValidationsSuckIn96::SkippableValidation
     include WhyValidationsSuckIn96::AttributeBasedValidation

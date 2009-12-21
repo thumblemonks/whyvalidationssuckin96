@@ -2,6 +2,18 @@ require 'whyvalidationssuckin96/skippable_validation'
 require 'whyvalidationssuckin96/attribute_based_validation'
 
 module WhyValidationsSuckIn96
+  
+  # Checks the validity of any associated objects, such as an ActiveRecord association.
+  #
+  # @example Checking the validity of an associated collection of tracks
+  #   setup_validations do
+  #     validates_associated :tracks
+  #   end
+  #
+  # @example Checking the validity of an associated artist
+  #   setup_validations do
+  #     validates_associated :artist
+  #   end
   class ValidatesAssociated < Validation
     DefaultOptions = {:message => "is invalid"}
     

@@ -1,4 +1,33 @@
 module WhyValidationsSuckIn96
+  # A mixin to handle specifying :if and :unless options to check before performing validation.
+  #
+  # @example Validate if a given block returns true
+  #   setup_validations do
+  #     validates_associated :tracks, :if => lambda { !validatable.tracks.empty? }
+  #   end
+  #
+  # @example Validate if a given method on the validatable object returns true
+  #   setup_validations do
+  #     validates_associated :tracks, :if => :allow_validation
+  #   end
+  #   
+  #   def allow_validation
+  #     false
+  #   end
+  #
+  # @example Validate unless a given block returns true
+  #   setup_validations do
+  #     validates_associated :tracks, :unless => lambda { validatable.tracks.empty? }
+  #   end
+  #
+  # @example Validate unless a given method on the validatable object returns true
+  #   setup_validations do
+  #     validates_associated :tracks, :unless => :disallow_validation
+  #   end
+  #   
+  #   def disallow_validation
+  #     true
+  #   end
   module SkippableValidation
     
     def validate

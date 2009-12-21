@@ -2,6 +2,33 @@ require 'whyvalidationssuckin96/skippable_validation'
 require 'whyvalidationssuckin96/attribute_based_validation'
 
 module WhyValidationsSuckIn96
+  
+  # Checks to see if a given attribute is present in any other records in the databaser
+  #
+  # @example Default usage
+  #   setup_validations do
+  #     validates_uniqueness_of :name
+  #   end
+  #
+  # @example Check in a case sensitive fashion
+  #   setup_validations do
+  #     validates_uniqueness_of :name, :case_sensitive => true
+  #   end
+  #
+  # @example Scope uniqueness to another attribute
+  #   setup_validations do
+  #     validates_uniqueness_of :name, :scope => :account_id
+  #   end
+  #
+  # @example Scope uniqueness to multiple other attributes
+  #   setup_validations do
+  #     validates_uniqueness_of :name, :scope => [:account_id, :domain]
+  #   end
+  #
+  # @example When used with STI, check only uniqueness of records of the current type
+  #   setup_validations do
+  #     validates_uniqueness_of :name, :base_class_scope => false
+  #   end
   class ValidatesUniqueness < Validation
     DefaultOptions = {:message => "has already been taken", :case_sensitive => false, :base_class_scope => true}
     
