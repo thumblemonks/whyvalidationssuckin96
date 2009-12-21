@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta name="Content-Type" content="text/html; charset=UTF-8" />
-<title>Class: WhyValidationsSuckIn96::ValidatesNumericality</title>
+<title>Class: WhyValidationsSuckIn96::ValidatesUrl</title>
 <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
@@ -22,7 +22,7 @@
     <a href="../_index.html">Index (V)</a> &raquo; 
     <a href="../WhyValidationsSuckIn96.html" title="WhyValidationsSuckIn96">WhyValidationsSuckIn96</a>
      &raquo; 
-    <span class="title">ValidatesNumericality</span>
+    <span class="title">ValidatesUrl</span>
   
 </div>
 
@@ -37,7 +37,7 @@
     
     <iframe id="search_frame"></iframe>
     
-    <div id="content"><h1>Class: WhyValidationsSuckIn96::ValidatesNumericality 
+    <div id="content"><h1>Class: WhyValidationsSuckIn96::ValidatesUrl 
   
   
 </h1>
@@ -53,7 +53,7 @@
           
             <li class="next"><a href="Validation.html" title="WhyValidationsSuckIn96::Validation">WhyValidationsSuckIn96::Validation</a></li>
           
-            <li class="next">WhyValidationsSuckIn96::ValidatesNumericality</li>
+            <li class="next">WhyValidationsSuckIn96::ValidatesUrl</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -72,7 +72,7 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/whyvalidationssuckin96/macros/validates_numericality.rb</dd>
+    <dd class="r1 last">lib/whyvalidationssuckin96/macros/validates_url.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -80,9 +80,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-Checks to see if a given attribute is a valid numerical value. Allows a
-certain degree of latitude in determining what is a valid numerical value,
-like allowing commas and spaces in the value for example.
+Checks whether a given attribute is a valid URL
 </p>
 
 
@@ -98,16 +96,16 @@ Default usage
 
 </h4>
       <pre class="example code">  <span class='setup_validations identifier id'>setup_validations</span> <span class='do do kw'>do</span>
-    <span class='validates_numericality_of identifier id'>validates_numericality_of</span> <span class='symbol val'>:cost</span>
+    <span class='validates_as_url identifier id'>validates_as_url</span> <span class='symbol val'>:website</span>
   <span class='end end kw'>end</span>
 </pre>
     
       <h4>
-Only allow integer values
+Specifying valid schemes instead of the defaults
 
 </h4>
       <pre class="example code">  <span class='setup_validations identifier id'>setup_validations</span> <span class='do do kw'>do</span>
-    <span class='validates_numericality_of identifier id'>validates_numericality_of</span> <span class='symbol val'>:cost</span><span class='comma token'>,</span> <span class='symbol val'>:only_integer</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='true true kw'>true</span>
+    <span class='validates_as_url identifier id'>validates_as_url</span> <span class='symbol val'>:website</span><span class='comma token'>,</span> <span class='symbol val'>:schemes</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>%w[ldap mailto]</span>
   <span class='end end kw'>end</span>
 </pre>
     
@@ -121,19 +119,7 @@ Only allow integer values
         <dt id="DefaultOptions-constant ">DefaultOptions =
             <span class="summary_desc"></span>
         </dt>
-        <dd><pre class="code"><span class='lbrace token'>{</span><span class='symbol val'>:message</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;is not a numerical value&quot;</span><span class='rbrace token'>}</span>
-</pre></dd>
-      
-        <dt id="StripNonNumeric-constant ">StripNonNumeric =
-            <span class="summary_desc"></span>
-        </dt>
-        <dd><pre class="code"><span class='regexp val'>/[^-+e\d.]/i</span><span class='m identifier id'>m</span>
-</pre></dd>
-      
-        <dt id="ValidNumericChars-constant ">ValidNumericChars =
-            <span class="summary_desc"></span>
-        </dt>
-        <dd><pre class="code"><span class='regexp val'>/\A[-+e\d.,\s]+\Z/i</span><span class='m identifier id'>m</span>
+        <dd><pre class="code"><span class='lbrace token'>{</span><span class='symbol val'>:message</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;is not a valid URL&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:schemes</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>%w[http https]</span><span class='rbrace token'>}</span>
 </pre></dd>
       
     </dl>
@@ -227,25 +213,23 @@ Only allow integer values
       <pre class="lines">
 
 
+24
+25
 26
 27
 28
 29
-30
-31
-32
-33</pre>
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/macros/validates_numericality.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/macros/validates_url.rb', line 24</span>
 
 <span class='def def kw'>def</span> <span class='validate identifier id'>validate</span>
   <span class='super super kw'>super</span>
-  <span class='if if kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:only_integer</span><span class='rbrack token'>]</span>
-    <span class='validate_as_integer identifier id'>validate_as_integer</span>
-  <span class='else else kw'>else</span>
-    <span class='validate_as_float identifier id'>validate_as_float</span>
-  <span class='end end kw'>end</span>
+  <span class='uri identifier id'>uri</span> <span class='assign token'>=</span> <span class='URI constant id'>URI</span><span class='dot token'>.</span><span class='parse identifier id'>parse</span><span class='lparen token'>(</span><span class='attribute_value identifier id'>attribute_value</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:schemes</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='include? fid id'>include?</span><span class='lparen token'>(</span><span class='uri identifier id'>uri</span><span class='dot token'>.</span><span class='scheme identifier id'>scheme</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='pass identifier id'>pass</span> <span class='colon op'>:</span> <span class='fail identifier id'>fail</span>
+<span class='rescue rescue kw'>rescue</span> <span class='URI constant id'>URI</span><span class='colon2 op'>::</span><span class='InvalidURIError constant id'>InvalidURIError</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='e identifier id'>e</span>
+  <span class='fail identifier id'>fail</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -258,7 +242,7 @@ Only allow integer values
 </div>
     
     <div id="footer">
-  Generated on Mon Dec 21 16:56:21 2009 by 
+  Generated on Mon Dec 21 16:56:22 2009 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
   0.5.0 (ruby-1.8.7).
 </div>
