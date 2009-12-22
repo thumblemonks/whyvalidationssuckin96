@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=UTF-8" />
+<title>Module: WhyValidationsSuckIn96::ActiveRecord::ClassMethods</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo; 
+    <a href="../../WhyValidationsSuckIn96.html" title="WhyValidationsSuckIn96">WhyValidationsSuckIn96</a> &raquo; <a href="../ActiveRecord.html" title="ActiveRecord">ActiveRecord</a>
+     &raquo; 
+    <span class="title">ClassMethods</span>
+  
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Namespace List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: WhyValidationsSuckIn96::ActiveRecord::ClassMethods 
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">lib/whyvalidationssuckin96/rails/active_record/base_validation_overrides.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+ClassMethods
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+  <h2>Instance Method Summary</h2>
+
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#validate-instance_method" title="#validate (instance method)">- (Object) <strong>validate</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc">
+FIXME - this is a seedy hack and i blame the entire contents of
+active_record/autosave_association.rb for it being necessary.
+
+</span>
+  
+</li>
+
+    
+  </ul>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="validate-instance_method">
+  
+    - (<tt><a href="../../Object.html" title="Object">Object</a></tt>) <strong>validate</strong>(*args) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+FIXME - this is a seedy hack and i blame the entire contents of
+active_record/autosave_association.rb for it being necessary.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/rails/active_record/base_validation_overrides.rb', line 48</span>
+
+<span class='def def kw'>def</span> <span class='validate identifier id'>validate</span><span class='lparen token'>(</span><span class='mult op'>*</span><span class='args identifier id'>args</span><span class='rparen token'>)</span>
+  <span class='return return kw'>return</span> <span class='false false kw'>false</span> <span class='unless unless_mod kw'>unless</span> <span class='WhyValidationsSuckIn96 constant id'>WhyValidationsSuckIn96</span><span class='colon2 op'>::</span><span class='ActiveRecord constant id'>ActiveRecord</span><span class='dot token'>.</span><span class='warn_on_deprecation identifier id'>warn_on_deprecation</span>
+  <span class='callstack identifier id'>callstack</span> <span class='assign token'>=</span> <span class='caller identifier id'>caller</span>
+  <span class='warn identifier id'>warn</span><span class='lparen token'>(</span><span class='string val'>&quot;This is a friendly message from WhyValidationsSuckIn96. \#{self.inspect} called 'validate' which is a\ndeprecated method. The arguments given were:\n\n\#{args.inspect} - \#{block_given? ? 'block given' : 'no block given'}\n\nand the caller was:\n\n\#{callstack.first}\n\nIf these warnings are coming from a call to 'add_autosave_association_callbacks', do not be alarmed, as\nWhyValidationsSuckIn96 has implemented its own versions of the necessary validation callbacks.\n\nThese warnings can be silenced by setting 'WhyValidationsSuckIn96::ActiveRecord.warn_on_deprecation' to false.\nYou will now be returned to your regularly scheduled programming.\n&quot;</span><span class='dot token'>.</span><span class='gsub identifier id'>gsub</span><span class='lparen token'>(</span><span class='regexp val'>/^\s{10}/</span><span class='comma token'>,</span> <span class='string val'>&quot;&quot;</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='false false kw'>false</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Mon Dec 21 23:30:37 2009 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

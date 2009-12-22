@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta name="Content-Type" content="text/html; charset=UTF-8" />
-<title>Class: WhyValidationsSuckIn96::ValidatesConfirmation</title>
+<title>Class: WhyValidationsSuckIn96::ValidatesUrl</title>
 <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
@@ -22,7 +22,7 @@
     <a href="../_index.html">Index (V)</a> &raquo; 
     <a href="../WhyValidationsSuckIn96.html" title="WhyValidationsSuckIn96">WhyValidationsSuckIn96</a>
      &raquo; 
-    <span class="title">ValidatesConfirmation</span>
+    <span class="title">ValidatesUrl</span>
   
 </div>
 
@@ -37,7 +37,7 @@
     
     <iframe id="search_frame"></iframe>
     
-    <div id="content"><h1>Class: WhyValidationsSuckIn96::ValidatesConfirmation 
+    <div id="content"><h1>Class: WhyValidationsSuckIn96::ValidatesUrl 
   
   
 </h1>
@@ -53,7 +53,7 @@
           
             <li class="next"><a href="Validation.html" title="WhyValidationsSuckIn96::Validation">WhyValidationsSuckIn96::Validation</a></li>
           
-            <li class="next">WhyValidationsSuckIn96::ValidatesConfirmation</li>
+            <li class="next">WhyValidationsSuckIn96::ValidatesUrl</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -72,7 +72,7 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/whyvalidationssuckin96/macros/validates_confirmation.rb</dd>
+    <dd class="r1 last">lib/whyvalidationssuckin96/macros/validates_url.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -80,9 +80,7 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-Checks the validity of an attribute against a confirmation field. Note that
-this validation does not set up the confirmation field on the object,
-leaving this up to the implementer.
+Checks whether a given attribute is a valid URL
 </p>
 
 
@@ -97,11 +95,17 @@ leaving this up to the implementer.
 Default usage
 
 </h4>
-      <pre class="example code">  <span class='class class kw'>class</span> <span class='Account constant id'>Account</span>
-    <span class='attr_accessor identifier id'>attr_accessor</span> <span class='symbol val'>:password</span><span class='comma token'>,</span> <span class='symbol val'>:password_confirmation</span>
-    <span class='setup_validations identifier id'>setup_validations</span> <span class='do do kw'>do</span>
-      <span class='validates_confirmation_of identifier id'>validates_confirmation_of</span> <span class='symbol val'>:password</span>
-    <span class='end end kw'>end</span>
+      <pre class="example code">  <span class='setup_validations identifier id'>setup_validations</span> <span class='do do kw'>do</span>
+    <span class='validates_as_url identifier id'>validates_as_url</span> <span class='symbol val'>:website</span>
+  <span class='end end kw'>end</span>
+</pre>
+    
+      <h4>
+Specifying valid schemes instead of the defaults
+
+</h4>
+      <pre class="example code">  <span class='setup_validations identifier id'>setup_validations</span> <span class='do do kw'>do</span>
+    <span class='validates_as_url identifier id'>validates_as_url</span> <span class='symbol val'>:website</span><span class='comma token'>,</span> <span class='symbol val'>:schemes</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>%w[ldap mailto]</span>
   <span class='end end kw'>end</span>
 </pre>
     
@@ -115,7 +119,7 @@ Default usage
         <dt id="DefaultOptions-constant ">DefaultOptions =
             <span class="summary_desc"></span>
         </dt>
-        <dd><pre class="code"><span class='lbrace token'>{</span><span class='symbol val'>:message</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;does not match the confirmation&quot;</span><span class='rbrace token'>}</span>
+        <dd><pre class="code"><span class='lbrace token'>{</span><span class='symbol val'>:message</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;is not a valid URL&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:schemes</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='dstring node'>%w[http https]</span><span class='rbrace token'>}</span>
 </pre></dd>
       
     </dl>
@@ -209,8 +213,6 @@ Default usage
       <pre class="lines">
 
 
-22
-23
 24
 25
 26
@@ -220,16 +222,14 @@ Default usage
 30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/macros/validates_confirmation.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/macros/validates_url.rb', line 24</span>
 
 <span class='def def kw'>def</span> <span class='validate identifier id'>validate</span>
   <span class='super super kw'>super</span>
-  <span class='skip identifier id'>skip</span> <span class='unless unless_mod kw'>unless</span> <span class='confirmation_value identifier id'>confirmation_value</span> <span class='assign token'>=</span> <span class='validatable identifier id'>validatable</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='confirmation_field identifier id'>confirmation_field</span><span class='rparen token'>)</span>
-  <span class='if if kw'>if</span> <span class='confirmation_value identifier id'>confirmation_value</span> <span class='eq op'>==</span> <span class='attribute_value identifier id'>attribute_value</span>
-    <span class='pass identifier id'>pass</span>
-  <span class='else else kw'>else</span>
-    <span class='fail identifier id'>fail</span>
-  <span class='end end kw'>end</span>
+  <span class='uri identifier id'>uri</span> <span class='assign token'>=</span> <span class='URI constant id'>URI</span><span class='dot token'>.</span><span class='parse identifier id'>parse</span><span class='lparen token'>(</span><span class='attribute_value identifier id'>attribute_value</span><span class='rparen token'>)</span>
+  <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:schemes</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='include? fid id'>include?</span><span class='lparen token'>(</span><span class='uri identifier id'>uri</span><span class='dot token'>.</span><span class='scheme identifier id'>scheme</span><span class='rparen token'>)</span> <span class='question op'>?</span> <span class='pass identifier id'>pass</span> <span class='colon op'>:</span> <span class='fail identifier id'>fail</span>
+<span class='rescue rescue kw'>rescue</span> <span class='URI constant id'>URI</span><span class='colon2 op'>::</span><span class='InvalidURIError constant id'>InvalidURIError</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='e identifier id'>e</span>
+  <span class='fail identifier id'>fail</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -242,7 +242,7 @@ Default usage
 </div>
     
     <div id="footer">
-  Generated on Mon Dec 21 23:30:36 2009 by 
+  Generated on Mon Dec 21 23:30:38 2009 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
   0.5.2 (ruby-1.8.7).
 </div>

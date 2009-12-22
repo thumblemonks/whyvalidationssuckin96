@@ -51,7 +51,9 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/whyvalidationssuckin96/rails/active_record.rb</dd>
+    <dd class="r1 last">lib/whyvalidationssuckin96/rails/active_record/association_validation.rb<span class="defines">,<br />
+  lib/whyvalidationssuckin96/rails/active_record/base_validation_overrides.rb</span>
+</dd>
   
 </dl>
 <div class="clear"></div>
@@ -71,7 +73,7 @@ ActiveRecord
 <p class="children">
    
     
-      <strong class="modules">Modules:</strong> <a href="ActiveRecord/InstanceMethods.html" title="InstanceMethods">InstanceMethods</a>
+      <strong class="modules">Modules:</strong> <a href="ActiveRecord/AssociationValidation.html" title="AssociationValidation">AssociationValidation</a>, <a href="ActiveRecord/ClassMethods.html" title="ClassMethods">ClassMethods</a>, <a href="ActiveRecord/InstanceMethods.html" title="InstanceMethods">InstanceMethods</a>
     
    
     
@@ -101,6 +103,37 @@ validates_numericality_of validates_presence_of validates_length_of]</span>
   
 
 
+  <h2>Class Attribute Summary</h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warn_on_deprecation-class_method" title="warn_on_deprecation (class method)">+ (Object) <strong>warn_on_deprecation</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+
+  
+    <span class="summary_desc">
+Returns the value of attribute warn_on_deprecation.
+
+</span>
+  
+</li>
+
+    
+  </ul>
+
 
   <h2>Class Method Summary</h2>
 
@@ -128,6 +161,54 @@ validates_numericality_of validates_presence_of validates_length_of]</span>
     
   </ul>
 
+  <div id="class_attr_details" class="attr_details">
+    <h2>Class Attribute Details</h2>
+    
+      
+      <span id="warn_on_deprecation=-class_method"></span>
+      <span id="warn_on_deprecation-class_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="warn_on_deprecation-class_method">
+  
+    + (<tt><a href="../Object.html" title="Object">Object</a></tt>) <strong>warn_on_deprecation</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute warn_on_deprecation
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/rails/active_record/base_validation_overrides.rb', line 7</span>
+
+<span class='def def kw'>def</span> <span class='warn_on_deprecation identifier id'>warn_on_deprecation</span>
+  <span class='@warn_on_deprecation ivar id'>@warn_on_deprecation</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 
   <div id="class_method_details" class="method_details_list">
     <h2>Class Method Details</h2>
@@ -154,22 +235,24 @@ validates_numericality_of validates_presence_of validates_length_of]</span>
       <pre class="lines">
 
 
-16
 17
 18
 19
 20
 21
-22</pre>
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/rails/active_record.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/whyvalidationssuckin96/rails/active_record/base_validation_overrides.rb', line 17</span>
 
 <span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='included identifier id'>included</span><span class='lparen token'>(</span><span class='klass_or_mod identifier id'>klass_or_mod</span><span class='rparen token'>)</span>
   <span class='remove_active_record_validation_related_methods_from identifier id'>remove_active_record_validation_related_methods_from</span><span class='lparen token'>(</span><span class='klass_or_mod identifier id'>klass_or_mod</span><span class='rparen token'>)</span>
   <span class='klass_or_mod identifier id'>klass_or_mod</span><span class='dot token'>.</span><span class='instance_eval identifier id'>instance_eval</span> <span class='do do kw'>do</span>
     <span class='include identifier id'>include</span> <span class='WhyValidationsSuckIn96 constant id'>WhyValidationsSuckIn96</span><span class='colon2 op'>::</span><span class='ValidationSupport constant id'>ValidationSupport</span>
     <span class='include identifier id'>include</span> <span class='WhyValidationsSuckIn96 constant id'>WhyValidationsSuckIn96</span><span class='colon2 op'>::</span><span class='ActiveRecord constant id'>ActiveRecord</span><span class='colon2 op'>::</span><span class='InstanceMethods constant id'>InstanceMethods</span>
+    <span class='extend identifier id'>extend</span> <span class='WhyValidationsSuckIn96 constant id'>WhyValidationsSuckIn96</span><span class='colon2 op'>::</span><span class='ActiveRecord constant id'>ActiveRecord</span><span class='colon2 op'>::</span><span class='ClassMethods constant id'>ClassMethods</span>
   <span class='end end kw'>end</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -183,7 +266,7 @@ validates_numericality_of validates_presence_of validates_length_of]</span>
 </div>
     
     <div id="footer">
-  Generated on Sun Dec 20 19:54:21 2009 by 
+  Generated on Mon Dec 21 23:30:36 2009 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
   0.5.2 (ruby-1.8.7).
 </div>
