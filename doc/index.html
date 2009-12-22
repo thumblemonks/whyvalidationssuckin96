@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta name="Content-Type" content="text/html; charset=UTF-8" />
-<title>Documentation by YARD 0.5.0</title>
+<title>Documentation by YARD 0.5.2</title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
 
@@ -79,7 +79,7 @@
     <span class='end end kw'>end</span>
     
     <span class='validates_presence_of identifier id'>validates_presence_of</span> <span class='symbol val'>:title</span><span class='comma token'>,</span> <span class='symbol val'>:artist</span>
-    <span class='validates_numericality_of identifier id'>validates_numericality_of</span> <span class='symbol val'>:year</span>
+    <span class='validates_numericality_of identifier id'>validates_numericality_of</span> <span class='symbol val'>:year</span><span class='comma token'>,</span> <span class='symbol val'>:only_integer</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='true true kw'>true</span>
   <span class='end end kw'>end</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -97,7 +97,11 @@
 <p>Easily inspect and test for the presence of validations on your class:</p>
 
 <pre class="code"><span class='Song constant id'>Song</span><span class='dot token'>.</span><span class='validation_collection identifier id'>validation_collection</span><span class='dot token'>.</span><span class='detect identifier id'>detect</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='lparen token'>(</span><span class='klass identifier id'>klass</span><span class='comma token'>,</span> <span class='opts identifier id'>opts</span><span class='rparen token'>)</span><span class='bitor op'>|</span>
-  <span class='klass identifier id'>klass</span><span class='dot token'>.</span><span class='is_a? fid id'>is_a?</span><span class='lparen token'>(</span><span class='WhyValidationsSuckIn96 constant id'>WhyValidationsSuckIn96</span><span class='colon2 op'>::</span><span class='ValidatesPresence constant id'>ValidatesPresence</span><span class='rparen token'>)</span>
+  <span class='klass identifier id'>klass</span> <span class='eq op'>==</span> <span class='WhyValidationsSuckIn96 constant id'>WhyValidationsSuckIn96</span><span class='colon2 op'>::</span><span class='ValidatesPresence constant id'>ValidatesPresence</span>
+<span class='end end kw'>end</span>
+
+<span class='Song constant id'>Song</span><span class='dot token'>.</span><span class='validation_collection identifier id'>validation_collection</span><span class='dot token'>.</span><span class='detect identifier id'>detect</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='lparen token'>(</span><span class='klass identifier id'>klass</span><span class='comma token'>,</span> <span class='opts identifier id'>opts</span><span class='rparen token'>)</span><span class='bitor op'>|</span>
+  <span class='klass identifier id'>klass</span> <span class='eq op'>==</span> <span class='WhyValidationsSuckIn96 constant id'>WhyValidationsSuckIn96</span><span class='colon2 op'>::</span><span class='ValidatesNumericality constant id'>ValidatesNumericality</span> <span class='andop op'>&amp;&amp;</span> <span class='opts identifier id'>opts</span><span class='lbrack token'>[</span><span class='symbol val'>:only_integer</span><span class='rbrack token'>]</span>
 <span class='end end kw'>end</span>
 </pre>
 
@@ -170,9 +174,9 @@
 <p>Copyright (c) 2009 gabrielg/thumblemonks. See LICENSE for details.</p></div></div>
     
     <div id="footer">
-  Generated on Mon Dec 21 16:56:20 2009 by 
+  Generated on Mon Dec 21 23:30:35 2009 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
-  0.5.0 (ruby-1.8.7).
+  0.5.2 (ruby-1.8.7).
 </div>
 
   </body>

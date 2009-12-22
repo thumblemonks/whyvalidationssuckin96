@@ -43,7 +43,7 @@ Define your validations or call pre-existing validation macros inside a validati
         end
         
         validates_presence_of :title, :artist
-        validates_numericality_of :year
+        validates_numericality_of :year, :only_integer => true
       end
     end
 
@@ -59,7 +59,11 @@ Check instances of your class for validity and inspect the failed validations:
 Easily inspect and test for the presence of validations on your class:
 
     Song.validation_collection.detect do |(klass, opts)|
-      klass.is_a?(WhyValidationsSuckIn96::ValidatesPresence)
+      klass == WhyValidationsSuckIn96::ValidatesPresence
+    end
+    
+    Song.validation_collection.detect do |(klass, opts)|
+      klass == WhyValidationsSuckIn96::ValidatesNumericality && opts[:only_integer]
     end
     
 Create your own reusable and testable validations:
