@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whyvalidationssuckin96}
-  s.version = "1.1.0"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["gabrielg", "douglasmeyer"]
@@ -81,6 +81,8 @@ Gem::Specification.new do |s|
      "lib/whyvalidationssuckin96/macros/validates_presence.rb",
      "lib/whyvalidationssuckin96/macros/validates_url.rb",
      "lib/whyvalidationssuckin96/rails/active_record.rb",
+     "lib/whyvalidationssuckin96/rails/active_record/association_validation.rb",
+     "lib/whyvalidationssuckin96/rails/active_record/base_validation_overrides.rb",
      "lib/whyvalidationssuckin96/rails/macros.rb",
      "lib/whyvalidationssuckin96/rails/macros/validates_uniqueness.rb",
      "lib/whyvalidationssuckin96/skippable_validation.rb",
@@ -98,8 +100,9 @@ Gem::Specification.new do |s|
      "test/macros/validates_numericality_test.rb",
      "test/macros/validates_presence_test.rb",
      "test/macros/validates_url_test.rb",
-     "test/rails/active_record_test.rb",
      "test/rails/active_record_test_helper.rb",
+     "test/rails/association_validation_test.rb",
+     "test/rails/base_validation_overrides_test.rb",
      "test/rails/macros/validates_uniqueness_test.rb",
      "test/skippable_validation_test.rb",
      "test/teststrap.rb",
@@ -125,8 +128,9 @@ Gem::Specification.new do |s|
      "test/macros/validates_numericality_test.rb",
      "test/macros/validates_presence_test.rb",
      "test/macros/validates_url_test.rb",
-     "test/rails/active_record_test.rb",
      "test/rails/active_record_test_helper.rb",
+     "test/rails/association_validation_test.rb",
+     "test/rails/base_validation_overrides_test.rb",
      "test/rails/macros/validates_uniqueness_test.rb",
      "test/skippable_validation_test.rb",
      "test/teststrap.rb",
