@@ -14,6 +14,11 @@ context "validates length" do
     WhyValidationsSuckIn96::ValidatesLength.new(Object.new, :attribute => :text, :is => 3).message
   end.equals("does not meet the given length restrictions")
   
+  should "not blow up with a nil attribute" do
+    validation = WhyValidationsSuckIn96::ValidatesLength.new(OpenStruct.new(:text => nil), :attribute => :text, :is => 3)
+    validation.validates?
+  end.equals(false)
+  
   context "when specifying the :is option" do
     should "not raise if solely :is is given" do
       WhyValidationsSuckIn96::ValidatesLength.new(Object.new, :attribute => :text, :is => 3)

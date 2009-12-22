@@ -53,6 +53,7 @@ module WhyValidationsSuckIn96
     
     def validate
       super
+      fail unless attribute_value.respond_to?(:size)
       all_valid = ValidOptions.collect do |opt_name|
         next(true) if options[opt_name].nil?
         send(:"validate_#{opt_name}")
