@@ -1,4 +1,5 @@
 require 'whyvalidationssuckin96/rails/active_record'
+WhyValidationsSuckIn96::ActiveRecord.warn_on_deprecation = false
 
 ActiveRecord::Base.establish_connection(:adapter  => "sqlite3", :database => ":memory:")
 ActiveRecord::Schema.define(:version => 1) do
@@ -11,7 +12,43 @@ ActiveRecord::Schema.define(:version => 1) do
     t.string :author
     t.string :type
   end
+  
+  create_table :books do |t|
+    t.string     :name
+    t.has_one    :glossary
+    t.has_many   :chapters
+  end
+  
+  create_table :glossaries do |t|
+    t.belongs_to :book
+  end
+  
+  create_table :chapters do |t|
+    t.string :name
+    t.belongs_to :book
+  end
+  
+  create_table :genres do |t|
+    t.string :name
+  end
+  
+  create_table :books_genres, :id => false do |t|
+    t.belongs_to :book
+    t.belongs_to :genre
+  end
 end 
+
+class Glossary < ActiveRecord::Base
+end
+
+class Book < ActiveRecord::Base
+end
+
+class Chapter < ActiveRecord::Base
+end
+
+class Genre < ActiveRecord::Base
+end
 
 class MusicalWork < ActiveRecord::Base
   attr_accessor :state, :callbacks_run, :validations_run 
