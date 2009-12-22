@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whyvalidationssuckin96}
-  s.version = "1.2.0"
+  s.version = "1.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["gabrielg", "douglasmeyer"]
-  s.date = %q{2009-12-21}
+  s.date = %q{2009-12-22}
   s.description = %q{A library for setting up model validations, such as in ActiveRecord.}
   s.email = %q{gabriel.gironda@gmail.com}
   s.extra_rdoc_files = [
@@ -33,6 +33,9 @@ Gem::Specification.new do |s|
      "doc/TrueClass.html",
      "doc/WhyValidationsSuckIn96.html",
      "doc/WhyValidationsSuckIn96/ActiveRecord.html",
+     "doc/WhyValidationsSuckIn96/ActiveRecord/AssociationValidation.html",
+     "doc/WhyValidationsSuckIn96/ActiveRecord/AssociationValidation/ClassMethods.html",
+     "doc/WhyValidationsSuckIn96/ActiveRecord/ClassMethods.html",
      "doc/WhyValidationsSuckIn96/ActiveRecord/InstanceMethods.html",
      "doc/WhyValidationsSuckIn96/AttributeBasedValidation.html",
      "doc/WhyValidationsSuckIn96/SkippableValidation.html",
