@@ -23,7 +23,8 @@ module WhyValidationsSuckIn96
       # @return [true, false]
       def valid?
         all_validations.collect do |validation|
-          validation.validates?
+          # Checks manually because a 'nil' return is considered a skipped validation, not a failed one.
+          (validation.validates? == false) ? false : true
         end.all?
       end
       
