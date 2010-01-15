@@ -36,5 +36,28 @@ context "validation_collection" do
         topic.keys == ['thing']
       end
     end
+
+    context "selecting a subset" do
+      setup do
+        @collection << WhyValidationsSuckIn96::ValidatesNumericality.new(Object.new, { :attribute => :other_thing })
+        @collection.select { |v| v.attribute == :thing }
+      end
+
+      should "return a ValidationCollection" do
+        topic.instance_of? WhyValidationsSuckIn96::ValidationCollection
+      end
+    end
+
+    context "rejecting a subset" do
+      setup do
+        @collection << WhyValidationsSuckIn96::ValidatesNumericality.new(Object.new, { :attribute => :other_thing })
+        @collection.reject { |v| v.attribute == :thing }
+      end
+
+      should "return a ValidationCollection" do
+        topic.instance_of? WhyValidationsSuckIn96::ValidationCollection
+      end
+    end
+
   end
 end

@@ -8,5 +8,9 @@ module WhyValidationsSuckIn96
       end.to_json(options)
     end
 
+    def select(&block)
+      self.class.new super
+    end
+
   end
 end
