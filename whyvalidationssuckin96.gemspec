@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whyvalidationssuckin96}
-  s.version = "1.2.3"
+  s.version = "1.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["gabrielg", "douglasmeyer"]
-  s.date = %q{2009-12-22}
+  s.date = %q{2010-01-15}
   s.description = %q{A library for setting up model validations, such as in ActiveRecord.}
   s.email = %q{gabriel.gironda@gmail.com}
   s.extra_rdoc_files = [
@@ -91,6 +91,7 @@ Gem::Specification.new do |s|
      "lib/whyvalidationssuckin96/skippable_validation.rb",
      "lib/whyvalidationssuckin96/validation.rb",
      "lib/whyvalidationssuckin96/validation_builder.rb",
+     "lib/whyvalidationssuckin96/validation_collection.rb",
      "lib/whyvalidationssuckin96/validation_support.rb",
      "test/attribute_based_validation_test.rb",
      "test/macros/validates_acceptance_test.rb",
@@ -110,6 +111,7 @@ Gem::Specification.new do |s|
      "test/skippable_validation_test.rb",
      "test/teststrap.rb",
      "test/validation_builder_test.rb",
+     "test/validation_collection_test.rb",
      "test/validation_support_test.rb",
      "test/validation_test.rb",
      "whyvalidationssuckin96.gemspec"
@@ -138,6 +140,7 @@ Gem::Specification.new do |s|
      "test/skippable_validation_test.rb",
      "test/teststrap.rb",
      "test/validation_builder_test.rb",
+     "test/validation_collection_test.rb",
      "test/validation_support_test.rb",
      "test/validation_test.rb"
   ]
