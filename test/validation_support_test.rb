@@ -34,6 +34,10 @@ context "validation_support" do
       topic.new
     end.respond_to(:all_validations)
     
+    should "have a ValidationCollection for all_validations" do
+      topic.new.all_validations.instance_of?(WhyValidationsSuckIn96::ValidationCollection)
+    end
+
     should "have an empty validation collection" do
       topic.validation_collection.size
     end.equals(0)

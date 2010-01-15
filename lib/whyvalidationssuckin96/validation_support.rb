@@ -1,4 +1,5 @@
 require 'whyvalidationssuckin96/validation_builder'
+require 'whyvalidationssuckin96/validation_collection'
 
 module WhyValidationsSuckIn96
   module ValidationSupport
@@ -43,8 +44,9 @@ module WhyValidationsSuckIn96
       # An array of instances of all validations for this object
       # @return [Array]
       def all_validations
-        @all_validations ||= self.class.validation_collection.collect do |(vc,opts)|
-          vc.new(self, opts)
+        @all_validations ||= self.class.validation_collection.inject(ValidationCollection.new) do |vc, (v,opts)|
+          vc << v.new(self, opts)
+          vc
         end
       end
       
