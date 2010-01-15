@@ -25,5 +25,16 @@ context "validation_collection" do
     should "have values of the validation options" do
       @validation_options.all? {|option,value| topic['thing'][option.to_s] == value }
     end
+
+    context "provided a hash of options" do
+      setup do
+        @collection << WhyValidationsSuckIn96::ValidatesNumericality.new(Object.new, { :attribute => :other_thing })
+        ActiveSupport::JSON.decode(@collection.to_json(:only => :thing))
+      end
+
+      should "respect those options when generating json" do
+        topic.keys == ['thing']
+      end
+    end
   end
 end
