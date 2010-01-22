@@ -61,9 +61,14 @@ module WhyValidationsSuckIn96
     def scope_columns
       Array(options[:scope])
     end
-    
+
     def find_conditions
-      ["LOWER(#{scope_class.connection.quote_column_name(attribute.to_s)}) = LOWER(?)", attribute_value]
+      column = scope_class.columns.detect { |col| col.name == attribute.to_s }
+      if column.type == :text or column.type == :string
+        ["LOWER(#{scope_class.connection.quote_column_name(attribute.to_s)}) = LOWER(?)", attribute_value]
+      else
+        ["#{scope_class.connection.quote_column_name(attribute.to_s)} = ?", attribute_value]
+      end
     end
     
     def scope_conditions

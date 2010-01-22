@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 1) do
   
   create_table :chapters do |t|
     t.string :name
+    t.integer :number
     t.belongs_to :book
   end
   

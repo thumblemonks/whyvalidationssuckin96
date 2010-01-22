@@ -68,6 +68,27 @@ context "validates uniqueness" do
         work.save
       end
     end # with default options
+
+    context "uniqueness of integers" do
+      setup do
+        Class.new(Chapter) do
+          setup_validations do
+            validates_uniqueness_of :number, :scope_to => :book_id
+          end
+        end
+      end
+
+      should "not allow two objects with the same number" do
+        chapter = topic.new(:name => "A Dark and Stormy Night",
+                            :number => 1, :book_id => 1)
+        chapter.save!
+        other_chapter = topic.new(:name => "Another Dark and Stormy Night",
+                          :number => 1, :book_id => 1)
+        !other_chapter.valid? && other_chapter.failed_validations.detect do |fv|
+          fv.kind_of?(WhyValidationsSuckIn96::ValidatesUniqueness) && fv.attribute == :number
+        end
+      end
+    end
     
     context "specifying case sensitivity" do
       setup do
