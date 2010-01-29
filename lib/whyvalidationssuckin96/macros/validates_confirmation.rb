@@ -36,5 +36,5 @@ module WhyValidationsSuckIn96
     end
   end # Validation
 
-  ValidationBuilder.register_macro :validates_confirmation_of, WhyValidationsSuckIn96::ValidatesAcceptance
+  ValidationBuilder.register_macro :validates_confirmation_of, WhyValidationsSuckIn96::ValidatesConfirmation
 end   # WhyValidationsSuckIn96
