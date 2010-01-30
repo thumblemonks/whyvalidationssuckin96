@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whyvalidationssuckin96}
-  s.version = "1.3.1"
+  s.version = "1.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["gabrielg", "douglasmeyer"]
-  s.date = %q{2010-01-27}
+  s.date = %q{2010-01-30}
   s.description = %q{A library for setting up model validations, such as in ActiveRecord.}
   s.email = %q{gabriel.gironda@gmail.com}
   s.extra_rdoc_files = [
@@ -90,6 +90,7 @@ Gem::Specification.new do |s|
      "lib/whyvalidationssuckin96/rails/macros.rb",
      "lib/whyvalidationssuckin96/rails/macros/validates_uniqueness.rb",
      "lib/whyvalidationssuckin96/skippable_validation.rb",
+     "lib/whyvalidationssuckin96/test/riot.rb",
      "lib/whyvalidationssuckin96/validation.rb",
      "lib/whyvalidationssuckin96/validation_builder.rb",
      "lib/whyvalidationssuckin96/validation_collection.rb",
@@ -111,6 +112,7 @@ Gem::Specification.new do |s|
      "test/rails/association_validation_test.rb",
      "test/rails/base_validation_overrides_test.rb",
      "test/rails/macros/validates_uniqueness_test.rb",
+     "test/riot/macros_test.rb",
      "test/skippable_validation_test.rb",
      "test/teststrap.rb",
      "test/validation_builder_test.rb",
@@ -141,6 +143,7 @@ Gem::Specification.new do |s|
      "test/rails/association_validation_test.rb",
      "test/rails/base_validation_overrides_test.rb",
      "test/rails/macros/validates_uniqueness_test.rb",
+     "test/riot/macros_test.rb",
      "test/skippable_validation_test.rb",
      "test/teststrap.rb",
      "test/validation_builder_test.rb",
