@@ -59,4 +59,17 @@ context "validation builder" do
     end.equals(1)
     
   end # when defining multiple validations with the same name in the one validation definition
+  
+  context "register_macro" do
+    should "add a key to the registered macros constant" do
+      WhyValidationsSuckIn96::ValidationBuilder.register_macro(:this_is_a_test_macro, Class.new)
+      WhyValidationsSuckIn96::ValidationBuilder::RegisteredMacros.has_key?(:this_is_a_test_macro)
+    end
+    
+    should "store the validation class in the registered macros constant" do
+      klass = Class.new
+      WhyValidationsSuckIn96::ValidationBuilder.register_macro(:this_is_another_test_macro, klass)
+      WhyValidationsSuckIn96::ValidationBuilder::RegisteredMacros[:this_is_another_test_macro].object_id == klass.object_id
+    end
+  end # register_macro
 end   # validation builder

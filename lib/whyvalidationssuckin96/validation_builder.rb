@@ -2,6 +2,7 @@ require 'whyvalidationssuckin96/validation'
 
 module WhyValidationsSuckIn96
   class ValidationBuilder
+    RegisteredMacros = {}
     
     # @param [Module, Class] klass_or_mod     The Class or Module to add validations to
     # @param [Proc]          definition_block The block to evaluate to define validations
@@ -18,6 +19,7 @@ module WhyValidationsSuckIn96
     # @param [Symbol] macro_name       The name to register this macro with
     # @param [Class]  validation_class The class implementing the validation
     def self.register_macro(macro_name, validation_class)
+      RegisteredMacros[macro_name] = validation_class
       define_method(macro_name) do |*args|
         attrs, options = extract_options(args)
         attrs.each do |attr|

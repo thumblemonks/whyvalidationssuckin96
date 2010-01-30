@@ -20,9 +20,15 @@ rescue LoadError
 end
 
 require 'rake/testtask'
-Rake::TestTask.new(:test_non_rails) do |test|
+Rake::TestTask.new(:test_core) do |test|
   test.libs << 'lib' << 'test'
-  test.test_files = FileList['test/**/*_test.rb'].exclude("test/rails/**/*_test.rb")
+  test.test_files = FileList['test/**/*_test.rb'].exclude("test/{rails,riot}/**/*_test.rb")
+  test.verbose = true
+end
+
+Rake::TestTask.new(:test_riot) do |test|
+  test.libs << 'lib' << 'test'
+  test.test_files = FileList["test/riot/**/*_test.rb"]
   test.verbose = true
 end
 
@@ -32,7 +38,7 @@ Rake::TestTask.new(:test_rails) do |test|
   test.verbose = true
 end
 
-task :test => [:check_dependencies, :test_non_rails, :test_rails]
+task :test => [:check_dependencies, :test_core, :test_riot, :test_rails]
 task :default => :test
 
 begin
