@@ -14,15 +14,36 @@ module WhyValidationsSuckIn96
     # Instance methods added to any class or module that mixes in ValidationSupport
     module InstanceMethods
       
+      def self.included(klass)
+        klass.module_eval do
+
+        end
+      end
+      
       # Is this object invalid?
       # @return [true, false]
       def invalid?
         !valid?
       end
       
+      def valid?
+        self.class.run_with_generic_callbacks? ? valid_with_generic_callbacks? : valid_without_generic_callbacks?
+      end
+      
+      # Is this object valid?
+      # Also runs any callbacks if the class has callback support as defined by the 
+      # instance method run_callbacks being present.
+      # @return [true, false]
+      def valid_with_generic_callbacks?
+        run_callbacks(:before_validation)
+        valid_without_generic_callbacks?
+      ensure
+        run_callbacks(:after_validation)
+      end
+      
       # Is this object valid?
       # @return [true, false]
-      def valid?
+      def valid_without_generic_callbacks?
         all_validations.collect do |validation|
           # Checks manually because a 'nil' return is considered a skipped validation, not a failed one.
           (validation.validates? == false) ? false : true
@@ -53,6 +74,17 @@ module WhyValidationsSuckIn96
     end # InstanceMethods
     
     module ClassMethods
+      
+      # If the class or module has a public 'run_callbacks' instance method, we run validations and fire 
+      # appropriate callbacks
+      # @return [true, false]
+      def run_with_generic_callbacks?
+        if defined?(@run_with_generic_callbacks)
+          @run_with_generic_callbacks
+        else
+          @run_with_generic_callbacks = public_instance_methods.include?('run_callbacks')
+        end
+      end
       
       # An array of arrays, the first element of each being the validation subclass that will be instantiated
       # when validation is performed, the last element being the options the validation will be instantiated

@@ -86,7 +86,7 @@ module WhyValidationsSuckIn96
       def valid_with_lifecycle_checking?
         validations_for_current_lifecycle.collect do |validation|
           # Checks manually because a 'nil' return is considered a skipped validation, not a failed one.
-          (validation.validates? == false) ? false : true
+          !(validation.validates? == false)
         end.all?
       end
       

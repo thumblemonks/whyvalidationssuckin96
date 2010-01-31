@@ -1,6 +1,41 @@
 require 'teststrap'
 
 context "validation_support" do
+
+  context "when mixed into a class supporting callbacks" do
+    setup do
+      Class.new do 
+        attr_reader :callbacks_run
+        
+        def initialize
+          @callbacks_run = []
+        end
+        
+        def run_callbacks(callback_name)
+          @callbacks_run << callback_name
+        end
+        
+        include WhyValidationsSuckIn96::ValidationSupport
+        setup_validations do
+          validate(:foo) { pass }
+        end
+      end.new
+    end
+    
+    should "run the before_validation callback when calling valid?" do
+      topic.callbacks_run.clear
+      topic.valid?
+      topic.callbacks_run
+    end.includes(:before_validation)
+    
+    should "run the after_validation callback when calling valid?" do
+      topic.callbacks_run.clear
+      topic.valid?
+      topic.callbacks_run
+    end.includes(:after_validation)
+    
+  end # when mixed into a class supporting callbacks
+  
   context "when mixed into a class" do
     setup do
       Class.new { include WhyValidationsSuckIn96::ValidationSupport }
