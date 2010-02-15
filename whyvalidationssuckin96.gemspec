@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{whyvalidationssuckin96}
-  s.version = "1.5.0"
+  s.version = "1.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["gabrielg", "douglasmeyer"]
-  s.date = %q{2010-01-30}
+  s.date = %q{2010-02-15}
   s.description = %q{A library for setting up model validations, such as in ActiveRecord.}
   s.email = %q{gabriel.gironda@gmail.com}
   s.extra_rdoc_files = [
@@ -76,6 +76,7 @@ Gem::Specification.new do |s|
      "lib/whyvalidationssuckin96/macros/validates_acceptance.rb",
      "lib/whyvalidationssuckin96/macros/validates_associated.rb",
      "lib/whyvalidationssuckin96/macros/validates_confirmation.rb",
+     "lib/whyvalidationssuckin96/macros/validates_date.rb",
      "lib/whyvalidationssuckin96/macros/validates_email.rb",
      "lib/whyvalidationssuckin96/macros/validates_exclusion.rb",
      "lib/whyvalidationssuckin96/macros/validates_format.rb",
@@ -100,6 +101,7 @@ Gem::Specification.new do |s|
      "test/macros/validates_acceptance_test.rb",
      "test/macros/validates_associated_test.rb",
      "test/macros/validates_confirmation_test.rb",
+     "test/macros/validates_date_test.rb",
      "test/macros/validates_email_test.rb",
      "test/macros/validates_exclusion_test.rb",
      "test/macros/validates_format_test.rb",
@@ -131,6 +133,7 @@ Gem::Specification.new do |s|
      "test/macros/validates_acceptance_test.rb",
      "test/macros/validates_associated_test.rb",
      "test/macros/validates_confirmation_test.rb",
+     "test/macros/validates_date_test.rb",
      "test/macros/validates_email_test.rb",
      "test/macros/validates_exclusion_test.rb",
      "test/macros/validates_format_test.rb",
