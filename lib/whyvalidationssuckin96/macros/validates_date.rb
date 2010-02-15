@@ -10,6 +10,8 @@ module WhyValidationsSuckIn96
   #     validates_as_date :start_date
   #   end
   class ValidatesDate < Validation
+    attr_reader :date
+
     include WhyValidationsSuckIn96::SkippableValidation
     include WhyValidationsSuckIn96::AttributeBasedValidation
     DefaultDelimiters = %r{[-/]}
@@ -45,7 +47,7 @@ module WhyValidationsSuckIn96
 
     def parse_date
       parsed = options[:parser].call(attribute_value.to_s)
-      Date.civil(parsed[:year].to_i, parsed[:month].to_i, parsed[:day].to_i)
+      @date = Date.civil(parsed[:year].to_i, parsed[:month].to_i, parsed[:day].to_i)
     end
   end # Validation
 

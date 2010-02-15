@@ -32,5 +32,17 @@ context "validates date" do
       validation = WhyValidationsSuckIn96::ValidatesDate.new(OpenStruct.new(:start_date => "4-20-1969"), :attribute => :start_date)
       validation.validates?
     end
+
+    should "have an accessor for the parsed date string" do
+      validation = WhyValidationsSuckIn96::ValidatesDate.new(OpenStruct.new(:start_date => "4-20-1969"), :attribute => :start_date)
+      validation.validates?
+      validation.date
+    end.equals(Date.civil(1969, 4, 20))
+
+    should "#date returns nil if validation does not pass" do
+      validation = WhyValidationsSuckIn96::ValidatesDate.new(OpenStruct.new(:start_date => "34-393"), :attribute => :start_date)
+      validation.validates?
+      validation.date
+    end.not!
   end   # validating an object
 end     # validates format
