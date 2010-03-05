@@ -44,6 +44,12 @@ module WhyValidationsSuckIn96
       end
     end
 
+  private
+
+    def attribute_value
+      options[:set] ? Array(super) : super
+    end
+
   end # Validation
 
   ValidationBuilder.register_macro :validates_exclusion_of, WhyValidationsSuckIn96::ValidatesExclusion
