@@ -43,9 +43,12 @@ module WhyValidationsSuckIn96
     # Performs the validation, returning true or false if the validation passes or fails,
     # or nil if the validation will not run.
     # @return [true, false, nil]
+    #
+    # @todo - this method is uuuuuuuugly
     def validates?
       if options[:array]
         return @passed = nil if skip_on_empty?
+        return @passed = false if !skip_on_empty? && Array(validatable.send(options[:attribute])).empty?
         reset
         @pos = 0
         statuses = []

@@ -86,6 +86,11 @@ context "attribute based validation mixin" do
         first_failed && inst.validates?
       end
 
+      should "fail if allow_empty is false and the collection is empty" do
+        inst = topic.new(OpenStruct.new(:test => []), :attribute => :test, :array => true, :allow_empty => false)
+        inst.validates?
+      end.equals(false)
+
       context "with :allow_empty" do
         should "skip validation if the array is empty" do
           inst = topic.new(OpenStruct.new(:test => []), :allow_empty => true, :attribute => :test, :array => true)
