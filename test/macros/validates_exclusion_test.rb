@@ -3,7 +3,7 @@ require 'teststrap'
 context "validates exclusion" do
 
   should "add a validation macro" do
-    WhyValidationsSuckIn96::ValidationBuilder.instance_methods
+    WhyValidationsSuckIn96::ValidationBuilder.instance_methods.map {|im| im.to_s}
   end.includes('validates_exclusion_of')
 
   should "raise if an :in option is not given" do

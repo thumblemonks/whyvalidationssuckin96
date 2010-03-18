@@ -3,7 +3,7 @@ require 'teststrap'
 context "validates format" do
   
   should "add a validation macro" do
-    WhyValidationsSuckIn96::ValidationBuilder.instance_methods
+    WhyValidationsSuckIn96::ValidationBuilder.instance_methods.map {|im| im.to_s}
   end.includes('validates_format_of')
   
   should "raise if a :with option is not given" do

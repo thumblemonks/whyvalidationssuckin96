@@ -3,7 +3,7 @@ require 'teststrap'
 context "validates length" do
   
   should "add a validation macro" do
-    WhyValidationsSuckIn96::ValidationBuilder.instance_methods
+    WhyValidationsSuckIn96::ValidationBuilder.instance_methods.map {|im| im.to_s}
   end.includes('validates_length_of')
   
   should "raise if an no options are given" do

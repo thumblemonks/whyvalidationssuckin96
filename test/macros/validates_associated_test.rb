@@ -3,7 +3,7 @@ require 'teststrap'
 context "validates associated" do
   
   should "add a validation macro" do
-    WhyValidationsSuckIn96::ValidationBuilder.instance_methods
+    WhyValidationsSuckIn96::ValidationBuilder.instance_methods.map {|im| im.to_s}
   end.includes('validates_associated')
   
   context "with some default options" do

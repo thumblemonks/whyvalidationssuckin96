@@ -88,7 +88,7 @@ module WhyValidationsSuckIn96
         if defined?(@run_with_generic_callbacks)
           @run_with_generic_callbacks
         else
-          @run_with_generic_callbacks = public_instance_methods.include?('run_callbacks')
+          @run_with_generic_callbacks = !public_instance_methods.grep(/run_callbacks/).empty?
         end
       end
 

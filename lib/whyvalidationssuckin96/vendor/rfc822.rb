@@ -1,7 +1,8 @@
+# encoding: binary
 #
 # RFC822 Email Address Regex
 # --------------------------
-# 
+#
 # Originally written by Cal Henderson
 # c.f. http://iamcal.com/publish/articles/php/parsing_email/
 #
@@ -9,7 +10,7 @@
 #
 # Licensed under a Creative Commons Attribution-ShareAlike 2.5 License
 # http://creativecommons.org/licenses/by-sa/2.5/
-# 
+#
 module WhyValidationsSuckIn96
   module RFC822
     EmailAddress = begin

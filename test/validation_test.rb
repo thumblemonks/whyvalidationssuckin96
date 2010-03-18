@@ -15,7 +15,7 @@ context "validation" do
     end.equals(:validates_rockingness)
 
     should "define validate as private on the new subclass" do
-      topic.private_instance_methods
+      topic.private_instance_methods.map {|im| im.to_s}
     end.includes("validate")
   end # creating a new subclass
 
