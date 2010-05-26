@@ -2,11 +2,22 @@ require 'teststrap'
 require 'active_support'
 
 context "validation_collection" do
+  setup do
+    @validation_options = { :is => 3 }
+    @collection = WhyValidationsSuckIn96::ValidationCollection.new
+    @collection << WhyValidationsSuckIn96::ValidatesLength.new(Object.new, { :attribute => :thing }.merge(@validation_options))
+  end
+
+  context "to_hash" do
+    setup do
+      @collection.to_hash
+    end
+
+    asserts("is a hash") { topic.is_a?(Hash) }
+  end
+
   context "to_json" do
     setup do
-      @validation_options = { :is => 3 }
-      @collection = WhyValidationsSuckIn96::ValidationCollection.new
-      @collection << WhyValidationsSuckIn96::ValidatesLength.new(Object.new, { :attribute => :thing }.merge(@validation_options))
       ActiveSupport::JSON.decode(@collection.to_json)
     end
 
